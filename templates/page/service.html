@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u670d\u52a1\u540d"}, {"name": "service_path", "title": "\u670d\u52a1\u8def\u5f84"}, {"select_type": "server", "type": "select", "name": "server", "title": "\u670d\u52a1\u5668"}, {"select_type": "app", "type": "select", "name": "app", "title": "\u5e94\u7528"}, {"name": "port", "title": "\u670d\u52a1\u7aef\u53e3"}, {"name": "description", "title": "\u5907\u6ce8"}], "name": "service", "title": "\u670d\u52a1"}
+            )
+        })
+    </script>
+{% endblock %}
+

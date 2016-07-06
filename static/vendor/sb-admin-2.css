@@ -2826,8 +2826,11 @@ body.body-small .footer.fixed {
 .table > tfoot > tr > td {
   border-top: 1px solid #e7eaec;
   line-height: 1.42857;
-  padding: 8px;
+  padding: 12px;
   vertical-align: top;
+  max-width: 90px;
+  overflow:hidden;
+
 }
 /* PANELS */
 .panel.blank-panel {

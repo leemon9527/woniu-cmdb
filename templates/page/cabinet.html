@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u673a\u67dc\u540d"}, {"name": "height", "title": "\u673a\u67dc\u9ad8\u5ea6"}, {"type": "select", "name": "double_power_supply", "value": {"0": "\u5426", "1": "\u662f"}, "title": "\u53cc\u8def\u7535\u6e90"}, {"select_type": "idc", "type": "select", "name": "idc", "title": "\u673a\u623f"}, {"name": "description", "title": "\u5907\u6ce8"}], "name": "cabinet", "title": "\u673a\u67dc"}
+            )
+        })
+    </script>
+{% endblock %}
+

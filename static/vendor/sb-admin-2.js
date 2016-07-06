@@ -227,6 +227,7 @@ $.extend(RebootPage.prototype, {
         var that = this
         var formArr = ['<form class="form-horizontal  ' + this.name + 'Form ">']
         $.each(this.data, function(indev, val) {
+            //console.log(val)
             // 表单验证配置
             if (!val.empty) {   
                 that.validators[val.name] = {
@@ -265,6 +266,30 @@ $.extend(RebootPage.prototype, {
             }
             formArr.push('</div></div>')
         })
+        //动态增加输入框
+        //if (this.name == "user"){
+        //    val = {}
+        //    val.empty=""
+        //    val.name="check"
+        //    val.title="确认密码"
+        //    // 表单验证配置
+        //    if (!val.empty) {
+        //        that.validators[val.name] = {
+        //            validators: {
+        //                notEmpty: {
+        //                    message: val.msg || '请输入' + val.title
+        //                }
+        //            }
+        //        }
+        //    };
+        //    val.placeholder = val.placeholder || '请输入' + val.title
+        //    val.type = val.type || 'text'
+        //    formArr.push('<div class="form-group">')
+        //    formArr.push('<label class="col-xs-3 control-label">' + val.title + '</label>')
+        //    formArr.push('<div class="col-xs-8">')
+        //    formArr.push('<input type="' + val.type + '"  class="form-control" name="' + val.name + '" placeholder="' + val.placeholder + '" />')
+        //    formArr.push('</div></div>')
+        //}
         formArr.push('<div class="form-group">' +
             '<label for="" class="col-xs-3 control-label"></label>' +
             '<div class="col-xs-5">' +
@@ -292,6 +317,7 @@ $.extend(RebootPage.prototype, {
     // 设置id 按钮的文字
 
     initUpdateForm: function() {
+        //更新表单初始化
         var that = this
         var updateForm = $(this.formStr).attr('id', 'update' + this.name + 'Form')
             .find('[type="submit"]').val('编辑').end()
@@ -353,11 +379,18 @@ $.extend(RebootPage.prototype, {
             e.preventDefault();
             var $form = $(e.target), // The form instance
                 fv = $(e.target).data('formValidation'); // FormValidation instance
+            console.log(fv)
             $.rajax($form.attr('id'), function(data) {
-                swal("添加成功!", '', 'success');
-                that.addForm[0].reset()
-                that.addModal.modal('hide')
-                that.getlist()
+                if (data['result'] =='ok') {
+                    swal("添加成功!", '', 'success');
+                }
+                else{
+                    swal("出错了!", data['result'], 'error');
+                }
+                that.addForm[0].reset();
+                that.addModal.modal('hide');
+                that.addForm.formValidation('resetForm', true); //重置form
+                that.getlist();
                     // getManu()
             })
 
@@ -380,11 +413,18 @@ $.extend(RebootPage.prototype, {
             var $form = $(e.target), // The form instance
                 fv = $(e.target).data('formValidation'); // FormValidation instance
             $.rajax($form.attr('id'), function(data) {
+                if (data['result'] == "ok") {
                 swal("更新成功!", '', 'success');
-                that.updateModal.modal('hide')
+                }
+                else{
+                    swal("出错了!", data['result'], 'error');
+                }
+                that.updateModal.modal('hide');
+                that.updateForm.formValidation('resetForm',true)
                 that.updateForm.find('[type="hidden"]').remove()
-                    .end().append('<input type="hidden" name="action_type" value="'+that.name+'">')[0].reset()
-                that.getlist()
+                    .end().append('<input type="hidden" name="action_type" value="' + that.name + '">')[0].reset();
+
+                that.getlist();
             })
 
         });
@@ -399,7 +439,6 @@ $.extend(RebootPage.prototype, {
         // that.initSelect()
         $(document).off('click.update').on('click.update', '.update', function() {
             var obj = $(this).data()
-            console.log(obj)
             $.each(obj, function(key, val) {
                 if (that.updateForm.find('[name="' + key + '"]').length) {
                     that.updateForm.find('[name="' + key + '"]').val(val)
@@ -423,8 +462,15 @@ $.extend(RebootPage.prototype, {
             }, function() {
 
             $.pajax('/delapi',{id:id,action_type:type},function(res){
-                swal("删除!", '', 'success');
-                that.getlist()
+                if (res['result'] == "ok"){
+                    swal("删除!", '', 'success');
+                    that.getlist()
+                }
+                else{
+                    swal("出错了!", res['result'], 'error');
+                    that.getlist()
+                }
+
 
             })
             });
@@ -484,7 +530,8 @@ $.extend(RebootPage.prototype, {
                 //将数据放在data里,编辑的时候从这里取数据渲染表单
                 $.each(v, function(key, val) {
                     if (val || val === 0) {
-                        btn.push(' data-' + key + '=' + val)
+                        btn.push(' data-' + key + '="' + val+'"')
+                        //btn.push(' data-' + key + '=' + val)
                     };
 
                 })
@@ -506,7 +553,8 @@ $.extend(RebootPage.prototype, {
                     };
 
                 })
-                var operateBtn = $(btn.join('')).addClass('update').html('更新').prop('outerHTML')
+
+                var operateBtn = $(btn.join('')).addClass('update').html('更新').prop('outerHTML');
                 if (that.modal_detail) {
                     operateBtn += $(btn.join('')).addClass('detail').html('详细').prop('outerHTML')
                 };
@@ -531,10 +579,20 @@ $.extend(RebootPage.prototype, {
             $('.table').dataTable().fnDestroy(); //还原初始化了的datatable
             this.tbody.html(str)
         }
-        // $('.table').DataTable().destory();  
+        $('.table').DataTable().destroy();
         $('.table').DataTable({
             responsive: true,
-            bLengthChange: false
+            bPaginate :true,
+            stateSave: true,
+            buttons: [
+                {extend:'colvis',text:'显示列'},
+                {extend:'excel',text:'导出'},
+            //'copy', 'excel', 'pdf'
+            ],
+            //dom: 'fBrtlip'
+            //dom: '<"top"f><"right"B>rt<"bottom"lip><"clear">'
+            dom: '<"top"fB>rt<"bottom"lipT>'
+            //bLengthChange: false
                 // bFilter:false,
                 // iDisplayLength:5
         });
@@ -544,7 +602,6 @@ $.rebootOps = function(opt) {
     var reboot = new RebootPage(opt)
     reboot.init()
 }
-
 
 $(function() {
     $('#side-menu').metisMenu();

@@ -7,15 +7,15 @@
 db_config = {
 	'host':'localhost',
 	'user':'root',
-	'passwd':"",
+	'passwd':"123456",
 	'db':'cmdb'
 }
 
 
 page_config = {
-    "brand_name":'51Reboot',
-    'title':'hello reboot',
-    "favicon":'https://pic1.zhimg.com/6d660dd4156c64bfad13ff97d79c2f98_l.jpg',
+    "brand_name":'CMDB',
+    'title':'JSCNTECH CMDB',
+    # "favicon":'',
     "menu":[
         {
             # user配置最好不要修改，是和登陆认证相关的，直接在下面加配置即可
@@ -30,98 +30,241 @@ page_config = {
             }]
         },
         {
-            # user配置最好不要修改，是和登陆认证相关的，直接在下面加配置即可
-            "name": 'test',
-            "title": '测试',
+            "title":"硬件管理",
+            "sub":[{
+            "name": 'server',
+            "title": '服务器',
+            "modal_detail":'True',
             "data": [{
-                "name": 'username',
-                "title": '用户名'
+                "name": 'name',
+                "title": '主机名'
             },{
-                "name":'password',
-                "title":'密码',
-                "empty":"yes"
-
+                "name":'ip1',
+                "title":'IP1',
+            },{
+                "name":'ip2',
+                "title":'IP2',
+            },{
+                "name":'cpu',
+                "title":'CPU核心数',
+            },{
+                "name":'cpu_all',
+                "title":'CPU详细信息',
+                "hide":'True',
+            },{
+                "name":'mem',
+                "title":'内存GB',
+            },{
+                "name":'disk',
+                "title":'硬盘',
+            },{
+                "name":'net_card',
+                "title":'网卡',
+            },
+                {
+                "name":'kernel',
+                "title":'内核版本',
+                "hide":'True',
+            },
+                {
+                "name":'os',
+                "title":'操作系统',
+            },{
+                "name":'sn',
+                "title":'序列号',
+            },{
+                "name":'double_power_supply',
+                "title":'双电源',
+                "type":'select',
+                "value":{0:'否',1:'是'}
+            },{
+                "name":'inuse_time',
+                "title":'上架时间',
+                "type":'date'
+            },{
+                "name":'cabinet',
+                "title":'机柜',
+                "type":'select',
+                "select_type":'cabinet'
+            },{
+                "name":'location_in_cabinet',
+                "title":'机柜位置',
+                "type":'select',
+                "value":{1:'1|3-4U',2:'2|7-8U',3:'3|11-12U',4:'4|15-16U',5:'5|19-20U',6:'6|23-24U',7:'7|27-28U',8:'8|31-32U',9:'9|35-36U',10:'10|39-40U',}
+            },{
+                "name":'status',
+                "title":'状态',
+                "type":'select',
+                "value":{0:'离线',1:'在线'}
+            },{
+                "name":'productname',
+                "title":'服务器型号',
+            },{
+                "name":'description',
+                "title":'备注',
+                "empty":'yes'
+            }]
+        },{
+            "name":'net_device',
+            "title":'网络设备',
+            "data":[{
+                "name":"name",
+                "title":'设备名'
+            },{
+                "name":"manage_ip",
+                "title":'管理地址'
+            },{
+                "name":"type",
+                "title":'设备型号'
+            },{
+                "name":"double_power_supply",
+                "title":'双路电源',
+                "type":'select',
+                "value":{0:'否',1:'是'}
+            },{
+                "name":"sn",
+                "title":'序列号'
+            },{
+                "name":"cabinet",
+                "title":'机柜',
+                "type":'select',
+                "select_type":'cabinet'
+            },{
+                "name":'location_in_cabinet',
+                "title":'机柜位置',
+                "type":'select',
+                "value":{1:'1|3-4U',2:'2|7-8U',3:'3|11-12U',4:'4|15-16U',5:'5|19-20U',6:'6|23-24U',7:'7|27-28U',8:'8|31-32U',9:'9|35-36U',10:'10|39-40U',}
+            },{
+                "name":"description",
+                "title":'备注',
             }]
         },
         {
-            "name":'caninet',
+            "name":'cabinet',
             "title":'机柜',
             "data":[{
                 "name":"name",
                 "title":'机柜名'
+            },{
+                "name":"height",
+                "title":'机柜高度'
+            },{
+                "name":"double_power_supply",
+                "title":'双路电源',
+                "type":'select',
+                "value":{0:'否',1:'是'}
+            },{
+                "name":"idc",
+                "title":'机房',
+                "type":'select',
+                "select_type":'idc'
+            },{
+                "name":"description",
+                "title":'备注',
             }]
         },
         {
-            "name":"host",
-            "title":"服务器",
+            "name":'idc',
+            "title":'机房',
             "data":[{
-                "name":"caninet",
-                "title":'机柜',
-                "type":'select',
-                "select_type":'caninet'
+                "name":"name",
+                "title":'机房名'
             },{
-                "name":"hostname",
-                "title":'主机名'
+                "name":"idc_address",
+                "title":'机房地址',
             },{
-                'name':'asset_no',
-                'title':'资产号'
-            },{
-                "name":'end_time',
-                "title":"过期日期",
-                "type":'date'
-            },{
-                "name":'ups',
-                "title":'是否开启',
-                "type":'select',
-                "value":{0:'开启',1:'关闭'}
+                "name":"idc_contact",
+                "title":'机房联系人',
             }]
-        }
+        }]},
+        {
+            "title":"软件管理",
+            "sub":[{
+                    "name":"app",
+                    "title":"应用",
+                    "data":[{
+                        "name":"name",
+                        "title":"应用名",
+                    },{
+                        "name":"app_path",
+                        "title":"应用路径",
+                    },{
+                        "name":"app_command",
+                        "title":"应用命令",
+                    },{
+                        "name":"app_log_path",
+                        "title":"应用日志",
+                    },{
+                        "name":"server",
+                        "title":"所在服务器",
+                        "type":"select",
+                        "select_type":"server"
+                    },{
+                        "name":"description",
+                        "title":'备注',
+                    }]
+                },{
+                    "name":"service",
+                    "title":"服务",
+                    "data":[{
+                        "name":"name",
+                        "title":"服务名",
+                    },{
+                        "name":"service_path",
+                        "title":"服务路径",
+                    },{
+                        "name":"server",
+                        "title":"服务器",
+                        "type":"select",
+                        "select_type":"server",
+                    },{
+                        "name":"app",
+                        "title":"应用",
+                        "type":"select",
+                        "select_type":"app"
+                    },{
+                        "name":"description",
+                        "title":'备注',
+                    }]
+                },{
+                    "name":"cluster",
+                    "title":"集群",
+                    "data":[{
+                        "name":"name",
+                        "title":"集群名",
+                    },{
+                        "name":"cluster_member",
+                        "title":"集群成员",
+                    },{
+                        "name":"cluster_command",
+                        "title":"服务命令",
+                    },{
+                        "name":"description",
+                        "title":"备注",
+                    }]
+                },{
+                    "name":"cron",
+                    "title":"定时任务",
+                    "data":[{
+                        "name":"name",
+                        "title":"定时任务",
+                    },{
+                        "name":"user",
+                        "title":"用户名",
+                    },{
+                        "name":"cron_command",
+                        "title":"命令",
+                    },{
+                        "name":"server",
+                        "title":"所在服务器",
+                        "type":"select",
+                        "select_type":"server"
+                    },{
+                        "name":"description",
+                        "title":"备注",
+                        "empty":"yes"
+                    }]
+                },]
+        },
     ]
 }
-
-
-
-
-
-# ,{
-#         "name": 'host',
-#         "title": '服务器',
-#         "data": [{
-#             "name": 'cabinet',
-#             "title": '机柜'
-#         },{
-#             "name":'hostname',
-#             "title":'主机名'
-#         }]
-#     },{
-#         "title": '业务',
-#         "sub":[
-#             {
-#                 'name': 'product',
-#                 'title': '业务线',
-#                 'data': [{
-#                     'name': 'service_name',
-#                     'title': '服务名'
-#                 },{
-#                     'name':'module_letter',
-#                     'title':'模块简称'
-#                 },{
-#                     'name':'dev_interface',
-#                     'title':'开发者'
-#                 },{
-#                     'name':'op_interface',
-#                     'title':'运维接口人'
-#                 }]
-#             },
-#             {
-#                 'name': 'raidtype',
-#                 'title': 'Raid厂商',
-#                 'data': [{
-#                     'name': 'name',
-#                     'title': 'Raid厂商'
-#                 }]
-#             }
-
-
-#         ]
-#     }

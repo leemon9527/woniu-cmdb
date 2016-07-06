@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u5b9a\u65f6\u4efb\u52a1"}, {"name": "user", "title": "\u7528\u6237\u540d"}, {"name": "cron_command", "title": "\u547d\u4ee4"}, {"select_type": "server", "type": "select", "name": "server", "title": "\u6240\u5728\u670d\u52a1\u5668"}, {"name": "description", "empty": "yes", "title": "\u5907\u6ce8"}], "name": "cron", "title": "\u5b9a\u65f6\u4efb\u52a1"}
+            )
+        })
+    </script>
+{% endblock %}
+

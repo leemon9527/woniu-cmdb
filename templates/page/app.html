@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u5e94\u7528\u540d"}, {"name": "app_path", "title": "\u5e94\u7528\u8def\u5f84"}, {"name": "app_command", "title": "\u5e94\u7528\u547d\u4ee4"}, {"name": "app_log_path", "title": "\u5e94\u7528\u65e5\u5fd7"}, {"select_type": "server", "type": "select", "name": "server", "title": "\u6240\u5728\u670d\u52a1\u5668"}, {"name": "description", "title": "\u5907\u6ce8"}], "name": "app", "title": "\u5e94\u7528"}
+            )
+        })
+    </script>
+{% endblock %}
+

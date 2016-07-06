@@ -46,7 +46,7 @@ def create_table(name,data):
     tmp = []
     for v in data:
         tmp.append('%s varchar(200)'%v['name'])
-    sql = 'create table %s (id int not null auto_increment primary key,%s) type=myisam default charset utf8' % (name,','.join(tmp))
+    sql = 'create table %s (id int not null auto_increment primary key,%s)' % (name,','.join(tmp))
     print sql
     db.execute(sql)
     print 'table %s is created' % (name)
@@ -68,5 +68,5 @@ if __name__ == '__main__':
     print config
     if len(sys.argv)>1 and sys.argv[1]=='init':
         init_database(config)
-        db.execute('insert into user (username,password) values ("51reboot","51reboot")')
+        db.execute('insert into user (username,password) values ("admin","admin")')
     gen_config(config)

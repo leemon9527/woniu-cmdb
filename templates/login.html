@@ -15,7 +15,7 @@
 <div class="login">
         <div class="login-screen">
           <div class="login-icon">
-            <img src="/static/vendor/flatui/img/icons/png/Compas.png" alt="Welcome to Mail App">
+            <img src="/static/vendor/flatui/img/icons/png/Compas.png" alt="Welcome to JSCNTECH CMDB">
             <h4>&nbsp;&nbsp;欢迎使用<small></small></h4>
           </div>
 
@@ -60,6 +60,12 @@
         msg.html('请输入用户名和密码')
       }
     })
+    document.onkeydown = function(e){
+        var ev = document.all?window.event:e;
+        if (ev.keyCode=="13"){
+            $('#login-btn').click()
+        }
+    }
     </script>
 
 

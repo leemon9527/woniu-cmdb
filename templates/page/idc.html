@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u673a\u623f\u540d"}, {"name": "idc_address", "title": "\u673a\u623f\u5730\u5740"}, {"name": "idc_contact", "title": "\u673a\u623f\u8054\u7cfb\u4eba"}], "name": "idc", "title": "\u673a\u623f"}
+            )
+        })
+    </script>
+{% endblock %}
+

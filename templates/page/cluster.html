@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u96c6\u7fa4\u540d"}, {"name": "cluster_member", "title": "\u96c6\u7fa4\u6210\u5458"}, {"name": "cluster_command", "title": "\u670d\u52a1\u547d\u4ee4"}, {"name": "description", "title": "\u5907\u6ce8"}], "name": "cluster", "title": "\u96c6\u7fa4"}
+            )
+        })
+    </script>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+{% block body %}
+{% endblock %}
+    
+{% block js %}
+    <script>	
+        $(function() {
+            $.rebootOps(
+              {"data": [{"name": "name", "title": "\u8bbe\u5907\u540d"}, {"name": "manage_ip", "title": "\u7ba1\u7406\u5730\u5740"}, {"name": "type", "title": "\u8bbe\u5907\u578b\u53f7"}, {"type": "select", "name": "double_power_supply", "value": {"0": "\u5426", "1": "\u662f"}, "title": "\u53cc\u8def\u7535\u6e90"}, {"name": "sn", "title": "\u5e8f\u5217\u53f7"}, {"select_type": "cabinet", "type": "select", "name": "cabinet", "title": "\u673a\u67dc"}, {"type": "select", "name": "location_in_cabinet", "value": {"1": "1|3-4U", "2": "2|7-8U", "3": "3|11-12U", "4": "4|15-16U", "5": "5|19-20U", "6": "6|23-24U", "7": "7|27-28U", "8": "8|31-32U", "9": "9|35-36U", "10": "10|39-40U"}, "title": "\u673a\u67dc\u4f4d\u7f6e"}, {"name": "description", "title": "\u5907\u6ce8"}], "name": "net_device", "title": "\u7f51\u7edc\u8bbe\u5907"}
+            )
+        })
+    </script>
+{% endblock %}
+
